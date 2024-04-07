@@ -74,13 +74,53 @@ describe('[Exercise 5] Seasons', () => {
   beforeEach(() => {
     seasons = new utils.Seasons() // each test must start with fresh seasons
   })
+
+  test('[9] the FIRST call of seasons.next returns "summer"', () => {
+    expect(seasons.next()).toBe('summer');
+  });
+
+  test('[10] the SECOND call of seasons.next returns "fall"', () => {
+    seasons.next(); // Skip summer
+    expect(seasons.next()).toBe('fall');
+  });
+
+  test('[11] the THIRD call of seasons.next returns "winter"', () => {
+    seasons.next(); // Advance to summer
+    seasons.next(); // Advance to fall
+    expect(seasons.next()).toBe('winter');
+  });
+
+  test('[12] the FOURTH call of seasons.next returns "spring"', () => {
+    seasons.next(); // Advance to summer
+    seasons.next(); // Advance to fall
+    seasons.next(); // Advance to winter
+    expect(seasons.next()).toBe('spring');
+  });
+
+  test('[13] the FIFTH call of seasons.next returns "summer"', () => {
+    seasons.next(); // Advance to summer
+    seasons.next(); // Advance to fall
+    seasons.next(); // Advance to winter
+    seasons.next(); // Advance to spring
+    expect(seasons.next()).toBe('summer');
+  });
+
+  test('[14] the 40th call of seasons.next returns "spring"', () => {
+    for (let i = 0; i < 39; i++) { // Iterate 39 times to get to the 40th call
+      seasons.next();
+    }
+    expect(seasons.next()).toBe('spring');
+  });
+});
+
+
   // test('[9] the FIRST call of seasons.next returns "summer"', () => {})
   // test('[10] the SECOND call of seasons.next returns "fall"', () => {})
   // test('[11] the THIRD call of seasons.next returns "winter"', () => {})
   // test('[12] the FOURTH call of seasons.next returns "spring"', () => {})
   // test('[13] the FIFTH call of seasons.next returns again "summer"', () => {})
   // test('[14] the 40th call of seasons.next returns "spring"', () => {})
-})
+
 
 describe('[Exercise 6] Car', () => {
   let focus
