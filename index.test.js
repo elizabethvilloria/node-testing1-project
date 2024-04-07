@@ -135,7 +135,10 @@ describe('[Exercise 5] Seasons', () => {
   
     test('[16] driving the car uses gas', () => {
       focus.drive(600); // Should exhaust the tank
-      expect(focus.fuel).toBe(0); // Tank should be empty
+      expect(focus.drive(1)).toBe(600)
+      expect(focus.drive(1)).toBe(600)
+      expect(focus.drive(1)).toBe(600)
+      expect(focus.fuel).toBe(0)
     });
   
     test('[17] refueling allows to keep driving', () => {
