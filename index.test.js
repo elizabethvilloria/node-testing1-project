@@ -122,18 +122,40 @@ describe('[Exercise 5] Seasons', () => {
   // test('[14] the 40th call of seasons.next returns "spring"', () => {})
 
 
-describe('[Exercise 6] Car', () => {
-  let focus
-  beforeEach(() => {
-    focus = new utils.Car('focus', 20, 30) // each test must start with a fresh car
-  })
-  // test('[15] driving the car returns the updated odometer', () => {})
-  // test('[16] driving the car uses gas', () => {})
-  // test('[17] refueling allows to keep driving', () => {})
-  // test('[18] adding fuel to a full tank has no effect', () => {})
-})
+  describe('[Exercise 6] Car', () => {
+    let focus;
+    beforeEach(() => {
+      focus = new utils.Car('focus', 20, 30); // Assume 30 mpg and a 20-gallon tank
+    });
+  
+    test('[15] driving the car returns the updated odometer', () => {
+      expect(focus.drive(300)).toBe(300); // Drives 300 miles
+      expect(focus.odometer).toBe(300); // Odometer should reflect this
+    });
+  
+    test('[16] driving the car uses gas', () => {
+      focus.drive(600); // Should exhaust the tank
+      expect(focus.fuel).toBe(0); // Tank should be empty
+    });
+  
+    test('[17] refueling allows to keep driving', () => {
+      focus.drive(600); // Exhaust the tank
+      focus.refuel(10); // Refuel 10 gallons
+      expect(focus.drive(100)).toBe(700); // Drive another 100 miles
+    });
+  
+    test('[18] adding fuel to a full tank has no effect', () => {
+      focus.refuel(5); // Attempt to overfill
+      expect(focus.fuel).toBe(20); // Fuel level should not exceed tank size
+    });
+  });
 
-describe('[Exercise 7] isEvenNumberAsync', () => {
-  // test('[19] resolves true if passed an even number', () => {})
-  // test('[20] resolves false if passed an odd number', () => {})
-})
+  describe('[Exercise 7] isEvenNumberAsync', () => {
+    test('[19] resolves true if passed an even number', async () => {
+      await expect(utils.isEvenNumberAsync(4)).resolves.toBe(true);
+    });
+  
+    test('[20] resolves false if passed an odd number', async () => {
+      await expect(utils.isEvenNumberAsync(5)).resolves.toBe(false);
+    });
+  });
